@@ -1,0 +1,80 @@
+{
+  "id": "456f7890-b12c-45d6-e789-123456789abc",
+  "facility": "Lewisville", 
+  "ppsCode": "DEA99988",
+  "targetDose": "15+15",
+  "doseRangeLow": 27.0,
+  "doseRangeHigh": 33.0,
+  "turnaround": "Expedited",
+  "envCondition": "Refrigerated",
+  "materials": [
+    {
+      "id": "mat-dea-001",
+      "productName": "Controlled Substance Schedule II",
+      "lotNumber": "CS2024007",
+      "quantity": 100,
+      "packaging": "Tamper-evident sealed containers",
+      "isControlledSubstance": true,
+      "deaSchedule": "II"
+    },
+    {
+      "id": "mat-dea-002",
+      "productName": "Standard Excipient",
+      "lotNumber": "EXC2024012",
+      "quantity": 500,
+      "packaging": "Standard pharmaceutical packaging",
+      "isControlledSubstance": false
+    }
+  ],
+  "deaData": {
+    "deaNumber": "AB1234567",
+    "cssrInboundUri": "https://dea.gov/cssr/tracking/CS2024007-001",
+    "substanceSchedule": "II",
+    "registrationExpiry": "2025-12-31T23:59:59.000Z",
+    "authorizedRepresentative": "Jane Doe, PharmD",
+    "complianceNotes": "Schedule II substance requires enhanced security protocols"
+  },
+  "signature": {
+    "data": "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVR42mP8/58BAzAOmjAAAf8C/f8T1LQAAAAASUVORK5CYII=",
+    "timestamp": "2024-07-31T14:22:15.000Z",
+    "signerName": "Jane Doe",
+    "signerTitle": "Licensed Pharmacist",
+    "hash": "f7e8d9c0b1a29384756291038475692837465928374659283746592837465928",
+    "complianceLevel": "21CFR11"
+  },
+  "status": "signed",
+  "createdAt": "2024-07-31T13:45:00.000Z",
+  "updatedAt": "2024-07-31T14:22:15.000Z",
+  "customerId": "cust-002",
+  "specialInstructions": "DEA Schedule II - Enhanced security required. Verify chain of custody documentation.",
+  "estimatedCompletionDate": "2024-08-02T16:00:00.000Z",
+  "priority": "expedited",
+  "complianceFlags": [
+    "DEA_CONTROLLED_SUBSTANCE",
+    "ENHANCED_SECURITY_REQUIRED",
+    "CHAIN_OF_CUSTODY_TRACKING"
+  ],
+  "auditTrail": [
+    {
+      "timestamp": "2024-07-31T13:45:00.000Z",
+      "action": "SOF_CREATED",
+      "userId": "user-dea-001",
+      "userRole": "Licensed_Pharmacist",
+      "details": "DEA SOF created with Schedule II substances"
+    },
+    {
+      "timestamp": "2024-07-31T14:20:00.000Z", 
+      "action": "DEA_VALIDATION_PASSED",
+      "userId": "system",
+      "userRole": "automated_validation",
+      "details": "DEA number verified, CSSR URI validated"
+    },
+    {
+      "timestamp": "2024-07-31T14:22:15.000Z",
+      "action": "SOF_SIGNED", 
+      "userId": "user-dea-001",
+      "userRole": "Licensed_Pharmacist",
+      "details": "Electronic signature applied with 21 CFR Part 11 compliance"
+    }
+  ]
+}

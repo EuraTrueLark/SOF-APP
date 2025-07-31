@@ -1,0 +1,70 @@
+erDiagram
+    CUSTOMER {
+        string id PK
+        string name
+        string contact_email
+        string address
+        datetime created_at
+        datetime updated_at
+    }
+    
+    SOF {
+        string id PK
+        string customer_id FK
+        string facility
+        string pps_code
+        string target_dose
+        number dose_range_low
+        number dose_range_high
+        string turnaround
+        string env_condition
+        string status
+        string signature_hash
+        datetime signed_at
+        datetime created_at
+        datetime updated_at
+    }
+    
+    MATERIAL {
+        string id PK
+        string sof_id FK
+        string product_name
+        string lot_number
+        integer quantity
+        string packaging
+        datetime created_at
+    }
+    
+    DEA_DATA {
+        string id PK
+        string sof_id FK
+        string dea_number
+        string cssr_inbound_uri
+        string substance_schedule
+        datetime created_at
+    }
+    
+    PPS_CATALOG {
+        string pps_code PK
+        string description
+        number validated_dose
+        boolean is_validated
+        string customer_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    
+    AUDIT_LOG {
+        string id PK
+        string sof_id FK
+        string event_type
+        string user_id
+        json event_data
+        datetime timestamp
+    }
+
+    CUSTOMER ||--o{ SOF : "places"
+    SOF ||--o{ MATERIAL : "contains"
+    SOF ||--o| DEA_DATA : "may_have"
+    CUSTOMER ||--o{ PPS_CATALOG : "owns"
+    SOF ||--o{ AUDIT_LOG : "generates"

@@ -1,0 +1,251 @@
+openapi: 3.1.0
+info:
+  title: Steri-Tek Smart SOF API
+  version: 1.0.0
+  description: AI-guided, self-validating Service Order System for irradiation processing
+
+components:
+  schemas:
+    SOF:
+      type: object
+      required: [facility, ppsCode, targetDose, turnaround, envCondition, materials, signature]
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        facility:
+          type: string
+          enum: [Fremont, Lewisville]
+          description: Processing facility location
+        ppsCode:
+          type: string
+          pattern: "^[A-Z0-9]{3,10}$"
+          description: Customer-specific process specification code
+        targetDose:
+          type: string
+          pattern: "^(\\d+(\\+\\d+)+|\\d+(\\.\\d+)?)$"
+          description: Target dose - single value or split dose format (e.g., "25" or "10+10+5")
+        doseRangeLow:
+          type: number
+          minimum: 0
+          description: Minimum acceptable dose level
+        doseRangeHigh:
+          type: number
+          minimum: 0
+          description: Maximum acceptable dose level
+        turnaround:
+          type: string
+          enum: [Standard, Expedited]
+          description: Processing timeframe requirement
+        envCondition:
+          type: string
+          enum: [Ambient, Frozen, Refrigerated]
+          description: Storage/processing temperature requirement
+        materials:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/Material"
+        deaData:
+          $ref: "#/components/schemas/DEAData"
+        signature:
+          $ref: "#/components/schemas/Signature"
+        status:
+          type: string
+          enum: [draft, signed, processing, completed, cancelled]
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Material:
+      type: object
+      required: [productName, lotNumber, quantity, packaging]
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        productName:
+          type: string
+          maxLength: 100
+          description: Name of product to be processed
+        lotNumber:
+          type: string
+          pattern: "^[A-Z0-9\\-]{1,20}$"
+          description: Manufacturing lot identifier
+        quantity:
+          type: integer
+          minimum: 1
+          description: Number of units to process
+        packaging:
+          type: string
+          maxLength: 50
+          description: Container/packaging description
+
+    DEAData:
+      type: object
+      properties:
+        deaNumber:
+          type: string
+          pattern: "^[A-Z]{2}\\d{7}$"
+          description: DEA registration number
+        cssrInboundUri:
+          type: string
+          format: uri
+          pattern: "^https://.+$"
+          description: Controlled substance shipment receipt URL
+        substanceSchedule:
+          type: string
+          enum: [I, II, III, IV, V]
+          description: DEA controlled substance classification
+
+    Signature:
+      type: object
+      required: [data, timestamp, signerName, signerTitle]
+      properties:
+        data:
+          type: string
+          format: byte
+          description: Base64 encoded signature image
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of signature
+        signerName:
+          type: string
+          maxLength: 100
+          description: Full name of person signing
+        signerTitle:
+          type: string
+          maxLength: 100
+          description: Job title/role of signer
+        hash:
+          type: string
+          readOnly: true
+          description: SHA-256 hash of signature for compliance
+
+    ValidationResponse:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+              ruleId:
+                type: string
+
+paths:
+  /sofs:
+    post:
+      summary: Create new SOF
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SOF"
+      responses:
+        201:
+          description: SOF created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SOF"
+
+  /sofs/{id}:
+    get:
+      summary: Get SOF by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: SOF details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SOF"
+
+  /sofs/{id}/duplicate:
+    post:
+      summary: Duplicate SOF with scrubbed fields
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Duplicated SOF with scrubbed sensitive fields
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SOF"
+
+  /sofs/{id}/validate:
+    post:
+      summary: Validate SOF data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SOF"
+      responses:
+        200:
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationResponse"
+
+  /sofs/{id}/sign:
+    post:
+      summary: Sign SOF
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Signature"
+      responses:
+        200:
+          description: SOF signed successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SOF"
