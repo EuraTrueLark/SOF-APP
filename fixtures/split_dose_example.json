@@ -1,0 +1,77 @@
+{
+  "id": "789a0123-c45d-67e8-f901-234567890def",
+  "facility": "Fremont",
+  "ppsCode": "RD2024X",
+  "targetDose": "10+10+5",
+  "doseRangeLow": 22.5,
+  "doseRangeHigh": 27.5,
+  "turnaround": "Standard",
+  "envCondition": "Frozen",
+  "materials": [
+    {
+      "id": "mat-split-001",
+      "productName": "Heat-Sensitive Biologic",
+      "lotNumber": "BIO2024003",
+      "quantity": 250,
+      "packaging": "Cryogenic vials in insulated containers",
+      "temperatureRequirement": "-80°C storage, -20°C processing"
+    }
+  ],
+  "deaData": null,
+  "signature": {
+    "data": "iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAEklEQVR42mP8/5+BgZEBAzAyMDAAA/8C/P8C1Q0AAAAASUVORK5CYII=",
+    "timestamp": "2024-07-31T11:45:22.000Z",
+    "signerName": "Dr. Sarah Johnson",
+    "signerTitle": "R&D Director",
+    "hash": "9f8e7d6c5b4a3928174650928374659283746592837465928374659283746592"
+  },
+  "status": "signed",
+  "createdAt": "2024-07-31T11:20:00.000Z",
+  "updatedAt": "2024-07-31T11:45:22.000Z",
+  "customerId": "cust-003",
+  "specialInstructions": "Split dose irradiation required - 10 kGy + 10 kGy + 5 kGy with 24-hour intervals between doses. Maintain frozen temperature throughout process.",
+  "estimatedCompletionDate": "2024-08-07T17:00:00.000Z",
+  "priority": "standard",
+  "processingNotes": {
+    "doseSequence": [
+      {
+        "sequence": 1,
+        "targetDose": 10,
+        "toleranceLow": 9.0,
+        "toleranceHigh": 11.0,
+        "waitPeriod": "24 hours"
+      },
+      {
+        "sequence": 2,
+        "targetDose": 10,
+        "toleranceLow": 9.0,
+        "toleranceHigh": 11.0,
+        "waitPeriod": "24 hours"
+      },
+      {
+        "sequence": 3,
+        "targetDose": 5,
+        "toleranceLow": 4.5,
+        "toleranceHigh": 5.5,
+        "waitPeriod": null
+      }
+    ],
+    "totalProcessingTime": "72 hours minimum",
+    "specialRequirements": [
+      "Maintain -20°C throughout irradiation",
+      "Monitor dose uniformity after each pass",
+      "Document temperature excursions if any"
+    ]
+  },
+  "rndProtocolDetails": {
+    "studyId": "RD-2024-BIO-003",
+    "principalInvestigator": "Dr. Sarah Johnson",
+    "objectiveType": "dose_optimization",
+    "expectedOutcome": "Determine minimum effective split dose schedule",
+    "dataCollectionPoints": [
+      "Post-dose 1: Viability assessment",
+      "Post-dose 2: Structural integrity", 
+      "Post-dose 3: Final efficacy testing"
+    ]
+  }
+}

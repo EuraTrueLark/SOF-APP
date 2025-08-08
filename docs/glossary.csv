@@ -1,0 +1,13 @@
+Term,Definition,Source
+PPS Code,"5-8 char process spec unique per customer; drives validated vs R&D pathways",SOF-How-To slide 5
+Processing Unit,"Physical box placed on tote",SOF PDF pg 1 field tooltip
+Split Dose,"Target dose expressed as ""x+x(+x)"" meaning multiple passes",SOF-How-To slide 5
+SOF,Service Order Form - primary document for irradiation processing requests,System documentation
+Facility,"Processing location - either Fremont or Lewisville",Business requirements
+Target Dose,"Desired irradiation dose level, can be single value or split dose format",Technical specification
+Dose Range,"Acceptable variance range around target dose (±10% for R&D, exact for validated PPS)",Quality control
+Turnaround,"Expected processing timeframe - Standard (5-7 days) or Expedited (2-3 days)",Service levels
+DEA Number,"Drug Enforcement Administration registration number for controlled substances",Regulatory compliance
+CSSR,"Controlled Substance Shipment Receipt - inbound tracking URI",DEA requirements
+Draft Order,"Incomplete SOF saved for later completion, auto-purged after 90 days",System workflow
+Signature,"Electronic signature with SHA-256 hash for 21 CFR Part 11 compliance",Compliance requirements

@@ -1,0 +1,41 @@
+{
+  "id": "123e4567-e89b-12d3-a456-426614174000",
+  "facility": "Fremont",
+  "ppsCode": "STD12345",
+  "targetDose": "25",
+  "doseRangeLow": 22.5,
+  "doseRangeHigh": 27.5,
+  "turnaround": "Standard",
+  "envCondition": "Ambient",
+  "materials": [
+    {
+      "id": "mat-001",
+      "productName": "Generic Pharmaceutical Tablet",
+      "lotNumber": "LOT2024001",
+      "quantity": 1000,
+      "packaging": "Sealed bottles in cardboard cases"
+    },
+    {
+      "id": "mat-002", 
+      "productName": "Active Pharmaceutical Ingredient",
+      "lotNumber": "API2024005",
+      "quantity": 50,
+      "packaging": "Heat-sealed pouches"
+    }
+  ],
+  "deaData": null,
+  "signature": {
+    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+    "timestamp": "2024-07-31T10:15:30.000Z",
+    "signerName": "John Smith",
+    "signerTitle": "Quality Manager",
+    "hash": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456"
+  },
+  "status": "signed",
+  "createdAt": "2024-07-31T09:30:00.000Z",
+  "updatedAt": "2024-07-31T10:15:30.000Z",
+  "customerId": "cust-001",
+  "specialInstructions": "Handle with care - temperature sensitive materials",
+  "estimatedCompletionDate": "2024-08-05T17:00:00.000Z",
+  "priority": "standard"
+}
